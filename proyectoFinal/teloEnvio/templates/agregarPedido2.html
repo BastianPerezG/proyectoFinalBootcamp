@@ -1,0 +1,48 @@
+{% extends 'base.html'%}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+<form method="post">
+    {% csrf_token %}
+    <p>Empresa seleccionada : {{buscaempresa}}</p>
+    <p>
+        <input type="hidden" id="id_idEmpresa" name="idEmpresa" value="{{empresa}}">
+    </p>
+
+    <p>
+        <label for="id_idDireccion">Dirección:</label>
+        <select name="idDireccion" class="form-select" required id="id_idDireccion">
+            <option value="" selected>Seleccione una dirección</option>
+            {% for direccion in direcciones %}
+            <option value="{{direccion.id}}">{{direccion.direccion}} {{direccion.numero}}, {{direccion.Comuna}}</option>
+            {% endfor %}
+        </select>
+
+    </p>
+
+    <p>
+        <label for="id_instrucciones_entrega">Instrucciones de entrega:</label>
+        <textarea name="instrucciones_entrega" cols="40" rows="10" class="form-control" required
+            id="id_instrucciones_entrega">
+    </textarea>
+
+
+    </p>
+
+    <p>
+        <label for="id_idMetodoPago">Método de pago:</label>
+        <select name="idMetodoPago" class="form-select" required id="id_idMetodoPago">
+            {% for metodopago in metodospago %}
+            <option value="{{metodopago.id}}">{{metodopago.nombre}}</option>
+            {% endfor %}
+
+        </select>
+
+
+
+
+    </p>
+    <button type="submit" class="btn btn-primary mt-3">Continua con la creación del pedido</button>
+</form>
+{% endblock %}

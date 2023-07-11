@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="container-fluid">
+    <h1 class="text-center mt-5">{{titulo}}</h1>
+</div>
+
+<div class="d-flex justify-content-center m-4">
+    {% if mensajes and mensajes.enviado %}
+        <div class="alert alert-success mt-3" role="alert">
+            {{ mensajes.resultado }}
+        </div>
+    {% endif %}
+    {% if mensajes and not mensajes.enviado %}
+        <div class="alert alert-danger mt-3" role="alert">
+            <h5>Errores en los siguientes campos:</h5>
+            {{ mensajes.resultado }}
+        </div>
+    {% endif %}
+</div>
+
+<div class="d-flex justify-content-center m-4">
+    <div style="width: 40rem;">
+        <form method="post" action="{% url 'registrarse' %}" class="formusers p-4" enctype="multipart/form-data">
+            {% csrf_token %}
+            {% for campo in formulario %}
+            <div class="row">
+                <div class="col-4 mb-3 fw-bold"><label for="{{ campo.id_for_label }}" class="form-label">{{ campo.label }}</label></div>
+                <div class="col-8">
+                    {{ campo }}
+                    {% if campo.help_text %}
+                    <div class="form-text">{{ campo.help_text }}</div>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+
+            <div class="d-flex justify-content-center m-4">
+                <button type="submit" class="btn btn-primary">Crear usuario</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

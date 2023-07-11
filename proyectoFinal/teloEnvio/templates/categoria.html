@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row">
+    <div class="col-2">
+        <div class="list-group">
+            {% for element in categorias %}
+                <a href="{% url 'categoria' id_categoria=element.id %}" class="list-group-item"><i class="fa-solid fa-tag"></i> {{element.nombre}}</a>
+            {% endfor %}
+            </div>
+    </div>
+    <div class="col-10">
+        {% if cantidad_productos == 0 %}
+            <p class="fs-2 text-center" style="color:dimgrey"><i class="fa-regular fa-face-frown-open"></i> No contamos con productos en esta categoría</p>
+        {% elif cantidad_productos > 0 %}
+            <div class="row row-cols-1 row-cols-md-4 g-4">
+                {% for element in productos %}
+                    <div class="col">
+                    <div class="card">
+                        <img src="{{element.image.url}}" class="card-img-top" alt="Foto de {{element.nombre}}">
+                        <div class="card-body">
+                        <h5 class="card-title">{{element.nombre}}</h5>
+                        <p class="card-text">{{element.descripcion}}</p>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Disponibilidad: {% if element.stock == 0%} No {% elif element.stock > 0 %} Si {% endif %}</li>
+                            <li class="list-group-item">Precio: {{element.precio}}</li>
+                            <li class="list-group-item">Stock: {{element.stock}}</li>
+                            
+                        </ul>
+                    </div>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

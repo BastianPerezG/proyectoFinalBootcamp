@@ -1,0 +1,50 @@
+{% extends 'base.html'%}
+
+{% block title %} {{title}} {% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-sm-12 col-md-6">
+        <div class="row">
+            <div class="col-sm-12 col-lg-6">
+                <h4>Estado del pedido:</h4>
+            </div>
+            <div class="col-sm-12 col-lg-6">
+                {% if pedido.idEstado_id   == 1 %} <!-- 1: En preparación -->
+                    <p class="btn btn-primary">{{ pedido.idEstado }}</p>
+                {% elif pedido.idEstado_id == 2 %} <!-- 2: Pendiente -->
+                    <p class="btn btn-warning">{{ pedido.idEstado }}</p>
+                {% elif pedido.idEstado_id == 3 %} <!-- 3: En despacho -->
+                    <p class="btn btn-info">{{ pedido.idEstado }}</p>
+                {% elif pedido.idEstado_id == 4 %} <!-- 4: Entregado -->
+                    <p class="btn btn-success">{{ pedido.idEstado }}</p>
+                {% elif pedido.idEstado_id == 5 %} <!-- 5: Cancelado -->
+                    <p class="btn btn-secondary">{{ pedido.idEstado }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-6">
+        
+            {% if grupo_usuario == 1 %}
+                {% if pedido.idEstado_id == 1 or pedido.idEstado_id == 2 %}
+                Puede cancelar el pedido con la siguiente opción: 
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="idEstado" id="id_idEstado" value="5">
+                        <button type="submit" class="btn btn-primary mt-3">Cancelar pedido</button> <a href="{% url 'detalle_pedido' idpedido=pedido.id %}" class="btn btn-primary mt-3">Volver atrás</a>
+                    </form>
+                {% else %}
+                    <a href="{% url 'detalle_pedido' idpedido=pedido.id %}" class="btn btn-primary mt-3">Volver atrás</a>
+                {% endif %}
+            {% elif grupo_usuario == 2 %}
+                <form method="post">
+                    {% csrf_token %}
+                    {{ form.as_p }}
+                    <button type="submit" class="btn btn-primary mt-3">Actualizar estado de pedido</button> <a href="{% url 'detalle_pedido' idpedido=pedido.id %}" class="btn btn-primary mt-3">Volver atrás</a>
+                </form>
+            {% endif %}
+
+    </div>
+</div>
+{% endblock %}

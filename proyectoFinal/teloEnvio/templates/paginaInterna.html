@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+{{primer_nombre}} {{apellido}}
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title"><i class="fa-solid fa-cart-shopping"></i> Mis pedidos</h5>
+                <p class="card-text">Acá esta un listado de los pedidos realizadas:</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title"><i class="fa-solid fa-newspaper"></i> Novedades</h5>
+                <p class="card-text">Acá están las últimas novedades.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title"><i class="fa-solid fa-gift"></i> Promociones</h5>
+                <p class="card-text">Acá están las promociones disponibles.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-12 col-md-6 col-lg-3">
+            <div class="card">
+                <div class="card-body">
+                <h5 class="card-title"><i class="fa-solid fa-user"></i> Contacto</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><i class="fa-solid fa-user"></i> Jorge Santibañez</li>
+                    <li class="list-group-item"><i class="fa-solid fa-phone"></i> 32 265 9850</li>
+                    <li class="list-group-item"><i class="fa-brands fa-whatsapp"></i> 9 9850 9856</li>
+                    <li class="list-group-item"><i class="fa-solid fa-envelope"></i> jsantibanez@telovendo.cl</li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

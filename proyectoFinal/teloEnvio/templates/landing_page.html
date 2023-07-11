@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{%load static %}
+
+
+{%block title%}{{titulo}}{%endblock%}
+
+{% block content%}
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-md-6 col-sm-12 d-flex justify-content-center align-content-evenly">
+            <img src="{% static 'assets/img/pedido.png' %}" alt="Productividad" width="100%">
+        </div>
+        <div class="col-md-6 col-sm-12 contenedorDerecho mt-sm-5 mt-md-0">
+            <div class="text-center d-flex align-content-center flex-wrap justify-content-center mt-5 seccion1">
+                <h1>TeloEnvío</h1>
+                <h3>Toma decisiones inteligentes sobre tus tareas y maximiza tu productividad</h3>
+            </div>
+
+            <div class="redesSociales mt-5 text-center ">
+                <h2>Siguenos en Nuestras Redes Sociales</h2>
+                <div class="d-flex flex-wrap justify-content-evenly mt-5">
+                    <img src="{% static 'assets/img/facebook.png' %}" alt="Facebook" width="100px">
+                    <img src="{% static 'assets/img/twitter.png' %}" alt="Twitter" width="92px" height="92px">
+                    <img src="{% static 'assets/img/instagram.png' %}" alt="Instagram" width="100px">  
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

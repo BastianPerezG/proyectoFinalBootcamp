@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+
+{% block title %} {% endblock %}
+
+
+{% block content %}
+<div class="d-flex justify-content-center mb-5 mt-3">
+    <h3>Detalles del pedido</h3>
+</div>
+
+<div class="container">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"><i class="fa-solid fa-bullseye"></i>  Estado</th>
+                <th scope="col"><i class="fa-regular fa-calendar-days"></i> Fecha de creación</th>
+                <th scope="col"><i class="fa-solid fa-hand-holding-dollar"></i> Medio de pago</th>
+                <th scope="col"><i class="fa-solid fa-dollar-sign"></i>Total del pedido</th>
+            </tr>
+        </thead>
+        <tbody>
+    
+            <tr>
+                <td>
+                    {% if pedido.idEstado_id   == 1 %} <!-- 1: En preparación -->
+                        <p class="btn btn-primary">{{ pedido.idEstado }}</p>
+                    {% elif pedido.idEstado_id == 2 %} <!-- 2: Pendiente -->
+                        <p class="btn btn-warning">{{ pedido.idEstado }}</p>
+                    {% elif pedido.idEstado_id == 3 %} <!-- 3: En despacho -->
+                        <p class="btn btn-info">{{ pedido.idEstado }}</p>
+                    {% elif pedido.idEstado_id == 4 %} <!-- 4: Entregado -->
+                        <p class="btn btn-success">{{ pedido.idEstado }}</p>
+                    {% elif pedido.idEstado_id == 5 %} <!-- 5: Cancelado -->
+                        <p class="btn btn-secondary">{{ pedido.idEstado }}</p>
+                    {% endif %}
+                    {% if pedido.idEstado_id  != 5 %}
+                    <a href="/interno/pedidos/orden/{{ pedido.id }}/modifica/estado"><p class="btn btn-primary">Modificar estado</p></a>
+                    {% endif %}
+                </td>
+                <td>{{ pedido.fecha_creacion }}</td>
+                <td>
+                    {% if pedido.idMetodoPago_id   == 1 %} <!-- 1: Efectivo -->
+                        <p class="btn btn-success"><i class="fa-solid fa-money-bill"></i> {{ pedido.idMetodoPago }}</p>
+                    {% elif pedido.idMetodoPago_id == 2 %} <!-- 2: Crédito TeLoVendo -->
+                        <p class="btn btn-success"><i class="fa-solid fa-money-check-dollar"></i> {{ pedido.idMetodoPago }}</p>
+                    {% elif pedido.idMetodoPago_id == 3 %} <!-- 3: Transferencia electrónica -->
+                        <p class="btn btn-success"><i class="fa-solid fa-landmark"></i> {{ pedido.idMetodoPago }}</p>
+                    {% elif pedido.idMetodoPago_id == 4 %} <!-- 4: Débito -->
+                        <p class="btn btn-success"><i class="fa-solid fa-credit-card"></i> {{ pedido.idMetodoPago }}</p>
+                    {% elif pedido.idMetodoPago_id == 5 %} <!-- 5: Crédito -->
+                        <p class="btn btn-success"><i class="fa-solid fa-credit-card"></i> {{ pedido.idMetodoPago }}</p>
+                    {% elif pedido.idMetodoPago_id == 6 %} <!-- 6: Prepago -->
+                        <p class="btn btn-success"><i class="fa-solid fa-credit-card"></i> {{ pedido.idMetodoPago }}</p>
+                    {% elif pedido.idMetodoPago_id == 7 %} <!-- 5: Webpay -->
+                        <p class="btn btn-success"><i class="fa-solid fa-globe"></i> {{ pedido.idMetodoPago }}</p>
+                    {% endif %}
+                </td>
+                <td>$ {{total_pedido}}</td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <h3>Información de entrega</h3>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">Dirección de entrega</th>
+                <th scope="col">Comuna</th>
+                <th scope="col">Instrucciones de entrega</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ direccion.direccion }} {{ direccion.numero }}</td>
+                <td>{{ direccion.Comuna }}</td>
+                <td>{{ pedido.instrucciones_entrega }}</td>
+                
+            </tr>
+        </tbody>
+    
+    </table>
+    
+</div>
+
+{% endblock %}

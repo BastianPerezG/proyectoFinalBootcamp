@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}{{title}} {% endblock %}
+
+{% block content %}
+<div class="content m-5">
+    <a class="btn btn-success mb-3" href="{% url 'agregar_producto'%}">Añadir Producto</a>
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col"><i class="fa-solid fa-receipt"></i> N°</th>
+                <th scope="col"><i class="fa-solid fa-receipt"></i> Foto</th>
+                <th scope="col"><i class="fa-solid fa-image-portrait"></i> Nombre</th>
+                <th scope="col"><i class="fa-solid fa-file-signature"></i> Descripción</th>
+                <th scope="col"><i class="fa-solid fa-file-signature"></i> Productor</th>
+                <th scope="col"><i class="fa-solid fa-hashtag"></i> Stock</th>
+                <th scope="col"><i class="fa-solid fa-dollar-sign"></i> Precio </th>
+                <th scope="col"><i class="fa-solid fa-pen-to-square"></i> Editar</th>
+                <th scope="col"><i class="fa-solid fa-trash"></i>Eliminar</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for producto in productos %}
+            <tr>
+                <th scope="row">{{ producto.id }}</th>
+                <td><img src="{{ producto.image.url }}" alt="Foto de producto {{produto.nombre}}" width="50px"></td>
+                <td>{{ producto.nombre }}</td>
+                <td>{{producto.descripcion}}</td>
+                <td>{{producto.idProductor.nombreContacto}}</td>
+                <td>{{ producto.stock }}</td>
+                <td>{{ producto.precio }}</td>
+                <td>
+                    <a class="btn btn-warning" href="{% url 'editar_producto' producto.id %}">Editar Producto</a>
+                </td>
+                <td>
+                    <a class="btn btn-danger" href="{% url 'eliminar_producto' producto.id %}">Eliminar</a>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+
+
+    </table>
+</div>
+{% endblock %}
